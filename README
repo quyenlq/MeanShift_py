@@ -1,0 +1,5 @@
+- First install required packages: 
+	pip install -r requirement.txt
+- Run: 
+	python mean_shift_runner.py
+- Evalutation report: see ../cluster_eval.xlx

@@ -14,7 +14,6 @@ def plot_solution(c,gt,data):
     plt.show()
 
 def ci(cens,gt,k):
-    # cens = np.array([c.xy_ for c in sol.centroids_])
     return max(one_way_ci(cens,gt,k),one_way_ci(gt,cens,k))
 
 def one_way_ci(cens_A, cens_B, n_clus):

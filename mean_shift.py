@@ -1,4 +1,3 @@
-
 import math
 import sys
 import numpy as np
@@ -45,7 +44,6 @@ class MeanShift(object):
         return MeanShiftResult(points, shift_points, group_assignments)
 
     def _shift_point(self, point, points, kernel_bandwidth):
-        # from http://en.wikipedia.org/wiki/Mean-shift
         points = np.array(points)
 
         # numerator
@@ -56,23 +54,6 @@ class MeanShift(object):
         shifted_point = np.multiply(tiled_weights.transpose(), points).sum(axis=0) / denominator
         return shifted_point
 
-        # ***************************************************************************
-        # ** The above vectorized code is equivalent to the unrolled version below **
-        # ***************************************************************************
-        # shift_x = float(0)
-        # shift_y = float(0)
-        # scale_factor = float(0)
-        # for p_temp in points:
-        #     # numerator
-        #     dist = ms_utils.euclidean_dist(point, p_temp)
-        #     weight = self.kernel(dist, kernel_bandwidth)
-        #     shift_x += p_temp[0] * weight
-        #     shift_y += p_temp[1] * weight
-        #     # denominator
-        #     scale_factor += weight
-        # shift_x = shift_x / scale_factor
-        # shift_y = shift_y / scale_factor
-        # return [shift_x, shift_y]
 
 class MeanShiftResult:
     def __init__(self, original_points, shifted_points, cluster_ids):
