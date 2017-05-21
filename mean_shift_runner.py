@@ -18,8 +18,9 @@ def ci(cens,gt,k):
     return max(one_way_ci(cens,gt,k),one_way_ci(gt,cens,k))
 
 def one_way_ci(cens_A, cens_B, n_clus):
-    sizeA = cens_A.size/2
-    sizeB = cens_B.size/2
+    d = cens_A[0].size
+    sizeA = cens_A.size/d
+    sizeB = cens_B.size/d
     biggestSize = np.max([sizeA,sizeB,n_clus])
     orphans = np.ones(biggestSize);
     for cenA in cens_A:
@@ -71,13 +72,13 @@ def main(arg):
 
 k_full = [15,15,15,15,20,35,50,8,100,100,16];
 files_full = ['s1','s2','s3','s4', 'a1', 'a2', 'a3','unbalance','birch1', 'birch2','dim32']
-kernel_full =[50000,50000,38000,38000,2000,1000,500,7000,500,500,20]
+kernel_full =[50000,50000,38000,38000,2000,1000,500,7000,500,500,25]
 k_lightweight = [15,15,15,15,20,35,50,8,16];
 files_lightweight = ['s1','s2','s3','s4', 'a1', 'a2', 'a3','unbalance','dim32']
-kernel_lightweight =[50000,50000,38000,38000,2000,1000,500,7000,20]
-k_test = [15]
-files_test = ['s1']
-kernel_test =[50000]
+kernel_lightweight =[50000,50000,38000,38000,2000,1000,500,7000,25]
+k_test = [16]
+files_test = ['dim32']
+kernel_test =[25]
 from sys import argv
 if len(argv)==2 and (argv[1] == 'full' or argv[1] == 'test'):
     main(argv[1])

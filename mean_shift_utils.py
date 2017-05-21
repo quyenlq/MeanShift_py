@@ -33,13 +33,14 @@ def multivariate_gaussian_kernel(distances, bandwidths):
 
 def get_centroids(ms_result):
     pts = ms_result.shifted_points
+    dimension = pts[0].size
     lbls = ms_result.cluster_ids
     n_cens = max(lbls)+1
     cens = []
     for i in range(n_cens):
         part = pts[lbls==i]
         cens = np.append(cens, np.mean(part,axis=0).tolist(), axis=0)
-    return cens.reshape((n_cens,2))
+    return cens.reshape((n_cens,dimension))
 
 def mse(data, centroids,lbls):
     k = max(lbls)+1
